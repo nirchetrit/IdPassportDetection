@@ -86,7 +86,7 @@ function App() {
         const boxes = predictions[1].dataSync();
         const classes = predictions[2].dataSync();
         const scores = predictions[4].dataSync();
-        setText1('have a score of:' + scores);
+
 
         const detectedObj = getDetectedObjFromPredictions(0.5, scores, boxes, classes, classes_dir);
         detectedObj.forEach(item => {
