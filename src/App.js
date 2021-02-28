@@ -13,8 +13,8 @@ const classes_dir = {
 
 function App() {
     const [model, setModel] = useState();
-    const [text,setText] = useState('')
-    const [text1,setText1] = useState('')
+    const [text, setText] = useState('');
+    const [text1, setText1] = useState('');
     const canvasRef = useRef();
     const videoRef = useRef();
 
@@ -26,7 +26,8 @@ function App() {
             console.log('warming up..');
             model.executeAsync(tf.zeros([1, 320, 320, 3]).asType('int32')).then(() => {
                 console.log('finish warming up');
-                setText(tf.getBackend())
+                setText(tf.getBackend());
+                setText1('you can detect now');
             });
         });
     }, []);
@@ -37,7 +38,9 @@ function App() {
             navigator.mediaDevices.getUserMedia({
                 audio: false,
                 video: {
-                    facingMode: "user"
+                    facingMode: {
+                        exact: 'environment'
+                    }
                 }
             }).then(stream => {
                 window.stream = stream;
@@ -83,7 +86,7 @@ function App() {
         const boxes = predictions[1].dataSync();
         const classes = predictions[2].dataSync();
         const scores = predictions[4].dataSync();
-        setText1('have a score of:'+scores)
+        setText1('have a score of:' + scores);
 
         const detectedObj = getDetectedObjFromPredictions(0.5, scores, boxes, classes, classes_dir);
         detectedObj.forEach(item => {
@@ -129,6 +132,7 @@ function App() {
     return (
         <div className="App">
             <h1>Running on: {text}</h1>
+            <h1>{text1}</h1>
             <video
                 style={{height: '640px', width: "640px"}}
                 className="size"
@@ -163,8 +167,8 @@ function App() {
                     top: '100px',
                     left: '100px'
                 }}
-                onClick={()  => {
-                     runModel(videoRef.current);
+                onClick={() => {
+                    runModel(videoRef.current);
                 }}>Click to run
             </button>
         </div>
