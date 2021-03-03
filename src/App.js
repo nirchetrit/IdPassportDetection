@@ -134,14 +134,12 @@ function App() {
             <h1>Running on: {text}</h1>
             <h1>{text1}</h1>
             <video
-                style={{height: '640px', width: "640px"}}
+                style={{height: '320px', width: "320px"}}
                 className="size"
                 autoPlay
                 playsInline
                 muted
                 ref={videoRef}
-                width="600"
-                height="500"
                 id="frame"
                 style={{
                     position: 'absolute',
@@ -153,8 +151,8 @@ function App() {
             <canvas
                 className="size"
                 ref={canvasRef}
-                width="640"
-                height="640"
+                width="320"
+                height="320"
                 style={{
                     position: 'absolute',
                     top: '300px',
